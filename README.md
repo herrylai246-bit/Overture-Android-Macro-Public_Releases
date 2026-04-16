@@ -1,25 +1,28 @@
 # Overture哥のAndroid Macro
 
-**Sol's RNG biome detector for Android** — reads Roblox logcat via [BloxstrapRPC](https://github.com/pizzaboxer/bloxstrap/wiki/Integrating-Bloxstrap-functionality-into-your-game), sends Discord webhook notifications when biomes change. 100% accurate, no OCR, no screen capture.
+**Sol's RNG Android 天氣偵測器** — 透過讀取 Roblox logcat 的 [BloxstrapRPC](https://github.com/pizzaboxer/bloxstrap/wiki/Integrating-Bloxstrap-functionality-into-your-game) 資料，在天氣變更時發送 Discord Webhook 通知。100% 準確，不使用 OCR，不截取螢幕。
 
-> ⚠️ **Pre-release** — this is an early version. Please report bugs via Issues.
+> ⚠️ **預覽版** — 這是早期版本，如遇到問題請回報。
 
 ---
 
-## Features
+## 功能
 
-- **Logcat-based detection** — reads `[BloxstrapRPC]` data from Roblox logcat for 100% accurate biome identification
-- **Discord webhook notifications** — sends rich embeds (Biome Started / Biome Ended) with biome color, Roblox thumbnail, server link, and uptime
-- **@everyone ping for rare biomes** — automatically pings `@everyone` when Glitched, Dreamspace, or Cyberspace is detected
-- **Auto-resolve biome thumbnails** — fetches the biome image directly from Roblox asset API
-- **Foreground service** — runs in the background while Roblox is open
-- **Auto-updater** — checks for new releases from GitHub and installs in-app
-- **One-time setup** — after granting READ_LOGS via Shizuku, you can uninstall Shizuku and the macro continues to work
+- **Logcat 偵測** — 讀取 Roblox logcat 中的 `[BloxstrapRPC]` 資料，100% 準確辨識天氣
+- **Discord Webhook 通知** — 天氣變更時發送精美 Embed（天氣開始 / 天氣結束），包含天氣顏色、Roblox 縮圖、伺服器連結與運行時間
+- **稀有天氣 @everyone** — 偵測到 Glitched、Dreamspace 或 Cyberspace 時自動 @everyone
+- **天氣個別設定** — 可單獨開關每個天氣的通知；稀有天氣始終開啟，無法關閉
+- **自訂縮圖上傳** — 為任何天氣上傳自訂圖片，取代 Discord Embed 中的預設 Roblox 縮圖
+- **自動解析天氣縮圖** — 未設定自訂縮圖時，透過 Roblox Asset API 自動取得天氣圖片
+- **Webhook 測試按鈕** — 一鍵測試 Discord Webhook 是否正常運作
+- **偵測紀錄** — 主頁即時顯示偵測到的天氣名稱與次數
+- **前景服務** — Roblox 開啟時持續在背景運行
+- **自動更新** — 檢查新版本並在應用內安裝
 
-## Supported Biomes
+## 支援天氣
 
-| Regular | Rare |
-|---------|------|
+| 一般天氣 | 稀有天氣 |
+|---------|---------|
 | Corruption | Cyberspace |
 | Eggland | Dreamspace |
 | Heaven | Glitched |
@@ -34,56 +37,58 @@
 
 ---
 
-## Requirements
+## 系統需求
 
-- Android 10+ (API 29)
-- [Shizuku](https://shizuku.rikka.app/) — needed **once** to grant `READ_LOGS` permission
-- Roblox with [BloxstrapRPC](https://github.com/pizzaboxer/bloxstrap/wiki/Integrating-Bloxstrap-functionality-into-your-game) data enabled (Sol's RNG supports this natively)
-- A Discord webhook URL
+- Android 10+（API 29）
+- [Shizuku](https://shizuku.rikka.app/) — 僅需使用**一次**來授予 `READ_LOGS` 權限
+- 已啟用 [BloxstrapRPC](https://github.com/pizzaboxer/bloxstrap/wiki/Integrating-Bloxstrap-functionality-into-your-game) 的 Roblox（Sol's RNG 原生支援）
+- 一個 Discord Webhook URL
 
-## Installation
+## 安裝
 
-1. Go to the [Releases page](https://github.com/herrylai246-bit/Overture-Android-Macro-Releases/releases)
-2. Download the latest `app-release.apk`
-3. Install the APK on your Android device (you may need to allow installs from unknown sources)
+1. 前往 [Releases 頁面](https://github.com/herrylai246-bit/Overture-Android-Macro-Releases/releases)
+2. 下載最新的 `Overture-Android-Macro-release.apk`
+3. 在 Android 裝置上安裝 APK（可能需要允許安裝不明來源的應用程式）
 
-## Setup Guide
+## 設定指南
 
-### 1. Install & Start Shizuku
+### 1. 安裝並啟動 Shizuku
 
-1. Install [Shizuku](https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api) from the Play Store
-2. Open Shizuku and start the service (wireless debugging or ADB method)
-3. Keep Shizuku running in the background
+1. 從 Play Store 安裝 [Shizuku](https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api)
+2. 開啟 Shizuku 並啟動服務（無線偵錯或 ADB 方式）
+3. 讓 Shizuku 在背景持續運行
 
-### 2. Configure the Macro
+### 2. 設定 Macro
 
-1. Open **Overture哥のAndroid Macro**
-2. Enter your **Discord Webhook URL**
-3. Enter your **Roblox server link** (displayed in webhook messages so others can join)
-4. Tap **設定 Shizuku 權限** (Setup Shizuku Permission) — this grants `READ_LOGS` once
-5. Tap **開始偵測** (Start Detection)
+1. 開啟 **Overture哥のAndroid Macro**
+2. 輸入你的 **Discord Webhook URL**
+3. 點擊 **測試 Webhook** 確認 Webhook 是否正常運作
+4. 輸入你的 **Roblox 伺服器連結**（會顯示在 Webhook 訊息中，方便其他人加入）
+5. 點擊 **天氣設定** 選擇要偵測的天氣，並為每個天氣上傳自訂縮圖
+6. 點擊 **設定 Shizuku 權限** — 僅需授權一次
+7. 點擊 **開始偵測**
 
-### 3. Done!
+### 3. 完成！
 
-The macro will now:
-- Send a **🟢 Started** status to your Discord webhook
-- Monitor Roblox logcat for biome changes
-- Send **Biome Started** and **Biome Ended** embeds with color, thumbnail, server link, and uptime
-- Ping `@everyone` for rare biomes (Glitched, Dreamspace, Cyberspace)
-- Send a **🔴 Stopped** status when you stop the macro
-
-
+Macro 現在會：
+- 發送 **🟢 已開始** 狀態到你的 Discord Webhook
+- 即時監控 Roblox logcat 的天氣變更
+- 發送 **天氣開始** 和 **天氣結束** Embed，包含顏色、縮圖、伺服器連結與運行時間
+- 偵測到稀有天氣（Glitched、Dreamspace、Cyberspace）時自動 @everyone
+- 在主頁即時顯示偵測紀錄
+- 停止時發送 **🔴 已停止** 狀態
 
 ---
 
-## How It Works
+## 運作原理
 
 ```
 Roblox → logcat [BloxstrapRPC] → LogcatBiomeReader → DetectionService → Discord Webhook
 ```
 
-1. Sol's RNG writes RPC data to Android logcat with the `[BloxstrapRPC]` tag
-2. The app reads logcat in real-time via the `READ_LOGS` permission (granted through Shizuku)
-3. Parses the JSON payload to extract the biome name and Roblox asset ID
-4. Resolves the asset ID to a thumbnail URL via the Roblox API
-5. Sends a  Discord embed via your webhook
+1. Sol's RNG 將 RPC 資料寫入 Android logcat，標籤為 `[BloxstrapRPC]`
+2. 應用程式透過 `READ_LOGS` 權限（經由 Shizuku 授予）即時讀取 logcat
+3. 解析 JSON 資料，擷取天氣名稱和 Roblox Asset ID
+4. 檢查天氣個別設定 — 跳過已關閉的天氣，使用自訂縮圖（如有上傳）
+5. 未設定自訂縮圖時，透過 Roblox API 解析 Asset ID 為縮圖 URL
+6. 透過 Webhook 發送 Discord Embed
