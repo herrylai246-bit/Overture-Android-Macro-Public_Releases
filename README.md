@@ -10,6 +10,7 @@
 
 - **Logcat 偵測** — 讀取 Roblox logcat 中的 `[BloxstrapRPC]` 資料，100% 準確辨識天氣
 - **Discord Webhook 通知** — 天氣變更時發送精美 Embed（天氣開始 / 天氣結束），包含天氣顏色、Roblox 縮圖、伺服器連結與運行時間
+- **Roblox 帳號偵測** — 自動從 logcat 擷取執行中的 Roblox 帳號，並在 Embed 顯示帳號（顯示名稱與 @使用者名稱）
 - **稀有天氣 @everyone** — 偵測到 Glitched、Dreamspace 或 Cyberspace 時自動 @everyone
 - **天氣個別設定** — 可單獨開關每個天氣的通知；稀有天氣始終開啟，無法關閉
 - **自訂縮圖上傳** — 為任何天氣上傳自訂圖片，取代 Discord Embed 中的預設 Roblox 縮圖
@@ -46,7 +47,7 @@
 
 ## 安裝
 
-1. 前往 [Releases 頁面](https://github.com/herrylai246-bit/Overture-Android-Macro-Releases/releases)
+1. 前往 [Releases 頁面](https://github.com/herrylai246-bit/Overture-Android-Macro-Public_Releases/releases)
 2. 下載最新的 `Overture-Android-Macro-release.apk`
 3. 在 Android 裝置上安裝 APK（可能需要允許安裝不明來源的應用程式）
 
@@ -74,6 +75,7 @@ Macro 現在會：
 - 發送 **🟢 已開始** 狀態到你的 Discord Webhook
 - 即時監控 Roblox logcat 的天氣變更
 - 發送 **天氣開始** 和 **天氣結束** Embed，包含顏色、縮圖、伺服器連結與運行時間
+- 在 Embed 顯示目前執行中的 **Roblox 帳號**（顯示名稱與 @使用者名稱）
 - 偵測到稀有天氣（Glitched、Dreamspace、Cyberspace）時自動 @everyone
 - 在主頁即時顯示偵測紀錄
 - 停止時發送 **🔴 已停止** 狀態
@@ -86,9 +88,11 @@ Macro 現在會：
 Roblox → logcat [BloxstrapRPC] → LogcatBiomeReader → DetectionService → Discord Webhook
 ```
 
+
 1. Sol's RNG 將 RPC 資料寫入 Android logcat，標籤為 `[BloxstrapRPC]`
 2. 應用程式透過 `READ_LOGS` 權限（經由 Shizuku 授予）即時讀取 logcat
 3. 解析 JSON 資料，擷取天氣名稱和 Roblox Asset ID
-4. 檢查天氣個別設定 — 跳過已關閉的天氣，使用自訂縮圖（如有上傳）
-5. 未設定自訂縮圖時，透過 Roblox API 解析 Asset ID 為縮圖 URL
-6. 透過 Webhook 發送 Discord Embed
+4. 從 Roblox 的遊戲加入紀錄擷取帳號 userId，並透過 Roblox API 解析為帳號名稱（顯示於 Embed）
+5. 檢查天氣個別設定 — 跳過已關閉的天氣，使用自訂縮圖（如有上傳）
+6. 未設定自訂縮圖時，透過 Roblox API 解析 Asset ID 為縮圖 URL
+7. 透過 Webhook 發送 Discord Embed
