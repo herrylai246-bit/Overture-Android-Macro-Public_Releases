@@ -2,8 +2,6 @@
 
 **Sol's RNG Android 天氣偵測器** — 透過讀取 Roblox logcat 的 [BloxstrapRPC](https://github.com/pizzaboxer/bloxstrap/wiki/Integrating-Bloxstrap-functionality-into-your-game) 資料，在天氣變更時發送 Discord Webhook 通知。100% 準確，不使用 OCR，不截取螢幕。
 
-> ⚠️ **預覽版** — 這是早期版本，如遇到問題請回報。
-
 ---
 
 ## 功能
@@ -16,6 +14,7 @@
 - **自訂縮圖上傳** — 為任何天氣上傳自訂圖片，取代 Discord Embed 中的預設 Roblox 縮圖
 - **自動解析天氣縮圖** — 未設定自訂縮圖時，透過 Roblox Asset API 自動取得天氣圖片
 - **Webhook 測試按鈕** — 一鍵測試 Discord Webhook 是否正常運作
+- - **Eden 偵測（畫面辨識）** — 透過螢幕擷取 + 文字辨識（ML Kit OCR）偵測 Eden 過場動畫，偵測到時發送含截圖的 Discord 通知（Eden 不會寫入 logcat，僅能用畫面偵測）
 - **偵測紀錄** — 主頁即時顯示偵測到的天氣名稱與次數
 - **前景服務** — Roblox 開啟時持續在背景運行
 - **自動更新** — 檢查新版本並在應用內安裝
